@@ -4,19 +4,16 @@ import ErrorBoundary from "@/components/common/ErrorBoundary";
 import { RouterProvider } from "react-router-dom";
 import { router } from "@/router/Routes";
 import { useIntroHook } from "@/store/slices/Intro/useIntroHook";
-import Intro from "@/components/common/Intro";
+import Intro from "@/features/Intro/Intro.jsx";
 const App = () => {
   const { isIntro } = useIntroHook();
-  console.log(isIntro);
-  
-  return isIntro ? (
-    <div className="">
-      <Intro />
+
+  return (
+    <div className="w-full h-fit relative bg-neutral-900 dark:bg-neutral-100 text-neutral-100 dark:text-neutral-900">
+      <ErrorBoundary>
+        {isIntro ? <Intro /> : <RouterProvider router={router} />}
+      </ErrorBoundary>
     </div>
-  ) : (
-    <ErrorBoundary>
-      <RouterProvider router={router} />
-    </ErrorBoundary>
   );
 };
 

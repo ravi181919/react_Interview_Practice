@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 const MainLayout = () => {
   return (
-    <div className="w-full h-screen relative top-0 left-0 flex flex-col dark:bg-neutral-900 bg-neutral-100 dark:text-neutral-100 text-neutral-900">
+    <div className="w-full h-screen relative top-0 left-0 flex flex-col ">
       {/* Header */}
       <header className="w-full h-[10vh] relative px-4 py-2">Header</header>
 

@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Intro = () => {
+const Hearder = () => {
   return (
     <div>
-      Intro
+      hh
     </div>
   )
 }
 
-export default Intro
+export default Hearder

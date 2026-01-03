@@ -123,3 +123,10 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+/* For No Scrollbar */
+
+::-webkit-scrollbar{
+  display: none;
+}
