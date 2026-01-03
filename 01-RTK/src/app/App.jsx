@@ -9,7 +9,7 @@ const App = () => {
   const { isIntro } = useIntroHook();
 
   return (
-    <div className="w-full h-fit relative bg-neutral-900 dark:bg-neutral-100 text-neutral-100 dark:text-neutral-900">
+    <div className="w-full h-fit relative bg-neutral-900 dark:bg-neutral-50 text-neutral-100 dark:text-neutral-900">
       <ErrorBoundary>
         {isIntro ? <Intro /> : <RouterProvider router={router} />}
       </ErrorBoundary>

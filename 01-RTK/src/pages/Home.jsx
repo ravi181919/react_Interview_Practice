@@ -4,8 +4,8 @@ const Home = () => {
   console.log("hello");
   
   return (
-    <div>
-      Index
+    <div className='flex items-center justify-center h-full'>
+      <h1 className='border px-4 py-1.5 rounded-md text-xs font-medium'>Home</h1>
     </div>
   )
 }
