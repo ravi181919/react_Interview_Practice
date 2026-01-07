@@ -6,7 +6,7 @@ import { Outlet } from "react-router-dom";
 const MainLayout = () => {
   return (
     <div className="w-full h-screen relative top-0 left-0 flex p-1 gap-1">
-      <div className="w-[20%] lg:block hidden h-full relative dark:bg-black/8 bg-neutral-800 rounded-lg px-2 py-4">
+      <div className="w-[20%] lg:block hidden h-full relative dark:bg-black/8 bg-neutral-800 rounded-lg py-4">
         <Sidebar />
       </div>
       <div className="lg:w-[80%] w-full h-full relative flex flex-col">

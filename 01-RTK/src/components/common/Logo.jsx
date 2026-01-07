@@ -3,7 +3,7 @@ import logo from "/logo.png";
 import { motion } from "framer-motion";
 const Logo = () => {
   return (
-    <div className="w-fit flex items-center gap-1.5">
+    <div className="w-full flex items-center gap-1.5 px-5">
       <div className="w-[8vw] lg:w-[2.5vw] relative overflow-hidden">
         <img src={logo} alt="logo" className="w-full object-cover" />
       </div>

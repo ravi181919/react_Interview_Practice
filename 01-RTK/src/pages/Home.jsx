@@ -1,3 +1,4 @@
+import AllTodos from '@/features/todo/allTodos/AllTodos';
 import React from 'react'
 
 const Home = () => {
@@ -5,7 +6,8 @@ const Home = () => {
   
   return (
     <div className='flex items-center justify-center h-full'>
-      <h1 className='border px-4 py-1.5 rounded-md text-xs font-medium'>Home</h1>
+      <AllTodos />
+      {/* <h1 className='border px-4 py-1.5 rounded-md text-xs font-medium'>Home</h1> */}
     </div>
   )
 }
