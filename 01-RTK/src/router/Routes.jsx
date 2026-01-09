@@ -7,6 +7,7 @@ import SuspenseWrapper from "@/components/common/SuspenseWrapper";
 const Home = lazy(() => import("@/pages/Home"));
 const Calendar = lazy(() => import("@/pages/Calendar"));
 const AddTask = lazy(() => import("@/pages/AddTask"));
+const Dashboard = lazy(() => import("@/pages/Dashboard"));
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +18,7 @@ export const router = createBrowserRouter([
     ),
     children: [
       { path: "/", element: <SuspenseWrapper component={<Home />} /> },
+      { path: "/dashboard", element: <SuspenseWrapper component={<Dashboard />} /> },
       {
         path: "/calender",
         element: <SuspenseWrapper component={<Calendar />} />,
