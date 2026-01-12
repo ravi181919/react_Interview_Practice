@@ -2,18 +2,18 @@ import React from 'react'
 
 const ProjectsStatus = ({ Card, FiArrowUpRight, FaCaretUp, CardHeader, CardContent}) => {
   return (
-    <div className="w-full grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:gap-4 gap-2 items-center place-items-center p-1 ">
+    <div className="w-full grid lg:grid-cols-4 md:grid-cols-1 gap-2 items-center place-items-center">
         {[...Array(4)].map((_, i) => (
           <Card
             key={i}
-            className={`w-full lg:w-full lg:h-28 h-fit bg-transparent overflow-hidden relative p-1 ${
+            className={`w-full lg:w-full lg:h-24 md:h-fit bg-transparent overflow-hidden relative p-1 ${
               i === 0 ? "bg-linear-to-tr from-[#64b345]  to-[#0daed6] text-neutral-50" : ""
             } `}
           >
             <div className="absolute top-0 left-0 w-full h-full bg-black/20 dark:bg-black/6 rounded-xl "></div>
-            <CardHeader className="w-full h-fit relative p-2 rounded-t-xl">
+            <CardHeader className="w-full h-fit relative px-2 py-1 rounded-t-xl">
               <div className="flex w-full justify-between items-center px-1  z-1">
-                <h1 className="font-medium text-sm w-fit">Total Projects</h1>
+                <h1 className="font-medium text-xs w-fit">Total Projects</h1>
                 <span
                   className={`border ${
                     i === 0
@@ -25,14 +25,14 @@ const ProjectsStatus = ({ Card, FiArrowUpRight, FaCaretUp, CardHeader, CardConte
                 </span>
               </div>
             </CardHeader>
-            <CardContent className="w-full h-fit relative p-3 pt-0 z-1">
-              <h1 className={`font-medium text-3xl text-start z-1`}>1819</h1>
-              <p className="flex items-center gap-0.5 z-1 px-0.5 mt-1">
+            <CardContent className="w-full h-fit relative px-3 pt-0 z-1">
+              <h1 className={`font-medium text-lg text-start z-1`}>1819</h1>
+              <p className="flex items-center gap-1 z-1 px-0.5 mt-1">
                 {i === 3 ? (
                   ""
                 ) : (
                   <span
-                    className={`inline-flex border border-accent items-center justify-between gap-0.5 py-0.5 px-1.5 rounded-sm ${
+                    className={`inline-flex border border-accent items-center justify-between gap-0.5 py-0.5 px-1 rounded-sm ${
                       i === 0 ? "border-orange-200 text-orange-300" : ""
                     }`}
                   >
@@ -41,7 +41,7 @@ const ProjectsStatus = ({ Card, FiArrowUpRight, FaCaretUp, CardHeader, CardConte
                   </span>
                 )}
                 <span
-                  className={`text-[10px] tracking-wide font-extralight px-1 ${
+                  className={`text-[10px] tracking-wide font-extralight ${
                     i === 0 ? "text-orange-200" : ""
                   }`}
                 >

@@ -4,7 +4,7 @@ const DashBoardHeading = ({ HiPlusSm, Button }) => {
   return (
     <div className="w-full flex items-start justify-between">
       <div className="">
-        <h1 className="text-2xl font-medium leading-none">Dashboard</h1>
+        <h1 className="text-xl font-medium leading-none">Dashboard</h1>
         <p className="text-xs font-extralight tracking-wider md:w-full w-[50%] pt-0.5">
           Plan, prioritize, and accomplish your task with ease.
         </p>
