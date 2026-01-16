@@ -26,15 +26,14 @@ export const todosSlice = createSlice({
         isCompleted: false,
         createdAt: new Date().toISOString(),
         duedate: action.payload.duedate || null, // Default due date to null if not provided
-        priority: action.payload.priority || 0, // Default priority to 0 if not provided
+        priority: action.payload.priority ?? "medium", // Default priority to "medium" if not provided (high, medium, low)
       });
     },
     deleteTodo: (state, action) => {
       /* Algorithm to delete a todo: 
         => action.payLoad have the id of the todo to be deleted
         => filter through the todos array and remove the todo with the matching id
-         
-        */
+      */
       const isTodo = state.todos.find((t) => t.id === action.payload);
       if (isTodo) state.undoDelete = isTodo; // Store the deleted todo for undo functionality
       state.todos = state.todos.filter((todo) => todo.id !== action.payload);
@@ -45,12 +44,11 @@ export const todosSlice = createSlice({
         => For finding the todo to be updated, use findIndex method on the todos array
         => if todo not found, return "todo not found" message
         => if found, update the todo with the updated date
-         
-        */
+      */
       const { id, updatedData } = action.payload;
-      const index = state.todos.findIndex((todo) => todo.id === id);
-      if (index === -1) return "Todo Not Found !";
-      state.todos[index] = { ...state.todos[index], ...updatedData };
+      const todo = state.todos.find((todo) => todo.id === id);
+      if (!todo) return;
+      Object.assign(todo, updatedData);
     },
     isCompletedToggle: (state, action) => {
       /**
@@ -59,11 +57,10 @@ export const todosSlice = createSlice({
        * => for finding the todo to be toggled, use findIndex method on the todos array
        * => if todo not found, return "todo not found" message
        * => if found, toggle the isCompleted status of the todo
-       *
        */
-      const index = state.todos.findIndex((todo) => todo.id === action.payload);
-      if (index === -1) return "Todo Not Found";
-      state.todos[index].isCompleted = !state.todos[index].isCompleted;
+      const todo = state.todos.find((todo) => todo.id === action.payload);
+      if (!todo) return;
+      todo.isCompleted = !todo.isCompleted;
     },
     undoDeleteTodo: (state) => {
       /**
@@ -85,6 +82,17 @@ export const todosSlice = createSlice({
        */
       state.filterStatus = action.payload;
     },
+    setPriority: (state, action) => {
+      /**
+       * Algorithm to set the prioity of task or project
+       * => action.payload will have priority (High, Low, Medium) and id of todo
+       * => according to id of todo, set the priority in the state to the action,payload
+       */
+      const { id, priority } = action.payload;
+      const todo = state.todos.find((todo) => todo.id === id);
+      if (!todo) return;
+      todo.priority = priority;
+    },
   },
 });
 export const {
@@ -94,5 +102,6 @@ export const {
   isCompletedToggle,
   setFilterTodo,
   undoDeleteTodo,
+  setPriority
 } = todosSlice.actions;
 export default todosSlice.reducer;

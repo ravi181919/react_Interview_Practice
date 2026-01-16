@@ -2,7 +2,7 @@ import React from 'react'
 
 const TodoItem = () => {
   return (
-    <div>
+    <div className='w-full '>
       todo item
     </div>
   )

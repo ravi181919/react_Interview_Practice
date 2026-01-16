@@ -35,9 +35,13 @@ const EmptyData = ({
       </EmptyHeader>
       <EmptyContent>
         <div className="flex gap-2">
-          <Button>
-            {" "}
+          <Button 
+          variant="outline"
+          asChild
+          >
+            <a href="/task">
             {btnLeft} <IoIosCreate />
+            </a>
           </Button>
           {oneBtn ? <Button>{btnRight}</Button> : null}
         </div>

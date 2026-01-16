@@ -7,7 +7,7 @@ import { TbBrandGoogleAnalytics } from "react-icons/tb";
 const NavLinks = () => {
   const links = [
     { name: "Dashboard", path: "/dashboard", icon: <MdSpaceDashboard size={16} /> },
-    { name: "Tasks", path: "/tasks", icon: <BsListTask size={15} /> },
+    { name: "Tasks", path: "/task", icon: <BsListTask size={15} /> },
     {
       name: "Analytics",
       path: "/analytics",
