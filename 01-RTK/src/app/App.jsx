@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./index.css";
 import ErrorBoundary from "@/components/common/ErrorBoundary";
+import { Toaster } from "@/components/ui/sonner";
 import { RouterProvider } from "react-router-dom";
 import { router } from "@/router/Routes";
 import { useIntroHook } from "@/store/slices/Intro/useIntroHook";
@@ -13,6 +14,7 @@ const App = () => {
       <ErrorBoundary>
         {isIntro ? <Intro /> : <RouterProvider router={router} />}
       </ErrorBoundary>
+      <Toaster />
     </div>
   );
 };

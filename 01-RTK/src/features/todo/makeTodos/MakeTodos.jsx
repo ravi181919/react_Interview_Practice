@@ -1,10 +1,8 @@
 import { Input } from "@/components/ui/input";
 import React, { useState } from "react";
-import AddTodoBtn from "../addTodoBtn/AddTodoBtn";
 import {
   Card,
   CardHeader,
-  CardFooter,
   CardTitle,
   CardDescription,
   CardContent,
@@ -19,20 +17,73 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import { addTodos } from "@/store/slices/todos/todosSlice";
+import { useDispatch } from "react-redux";
 
 const MakeTodos = ({ className }) => {
-  const [inputValue, setInputValue] = useState("");
+  const dispatch = useDispatch();
+  const [inputValueOfTitle, setInputValueOfTitle] = useState("");
   const [descriptionValue, setDescriptionValue] = useState("");
+  // priorityOptions: available choices; priority: currently selected
+  const [priorityOptions] = useState(["High", "Medium", "Low"]);
+  const [priority, setPriority] = useState("");
+
+  // Handle Title
   const handleInputChange = (e) => {
-    const inputValue = e.target.value;
-    if(inputValue.trim() === "") return;
-    else setInputValue(inputValue);
-    
+    setInputValueOfTitle(e.target.value);
   };
-  
-  const handleCreate = () => {
-    setInputValue("");
-  }
+
+  // Handle Priority
+  // Select's onValueChange provides the value (string), not an event
+  const handlePriority = (value) => {
+    if (typeof value !== "string" || value.trim() === "") {
+      toast.error("Empty Value is Not Allowed");
+      return;
+    }
+    setPriority(value);
+  };
+
+  // Handle Description
+  const handleTaskDescription = (e) => {
+    setDescriptionValue(e.target.value);
+  };
+
+  // disabled Button when any input is empty
+  const isButtonDisabled =
+    !inputValueOfTitle.trim() || !priority.trim() || !descriptionValue.trim();
+
+  // handle create task or prject
+  const handleCreate = (e) => {
+    e.preventDefault(); // stop page reload
+    // validate on submit
+    if (inputValueOfTitle.trim() === "") {
+      toast.error("Task title is required");
+      return;
+    }
+    if (priority.trim() === "") {
+      toast.error("Please select a priority");
+      return;
+    }
+    if (descriptionValue.trim() === "") {
+      toast.error("Task description is required");
+      return;
+    }
+
+    // TODO: dispatch or save the new task to store
+    dispatch(
+      addTodos({
+        priority,
+        title: inputValueOfTitle.trim(),
+        description: descriptionValue.trim(),
+      })
+    );
+
+    setInputValueOfTitle("");
+    setPriority("");
+    setDescriptionValue("");
+    toast.success("Task Created");
+  };
   return (
     <div className={`max-w-sm flex relative ${className}`}>
       <Card className="bg-accent-foreground w-full">
@@ -43,7 +94,10 @@ const MakeTodos = ({ className }) => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="w-full relative flex flex-col gap-4 ">
+          <form
+            onSubmit={handleCreate}
+            className="w-full relative flex flex-col gap-4 "
+          >
             <div className="grid grid-cols-6 gap-2">
               <div className="col-span-3">
                 <label
@@ -54,8 +108,8 @@ const MakeTodos = ({ className }) => {
                 </label>
                 <Input
                   id="newTask"
-                  name="taskTilte"
-                  value={inputValue}
+                  name="taskTitle"
+                  value={inputValueOfTitle}
                   onChange={handleInputChange}
                   placeholder="Title for tasks..."
                   className="text-sm placeholder:text-xs bg-transparent border-accent focus-visible:ring-0 "
@@ -63,18 +117,25 @@ const MakeTodos = ({ className }) => {
               </div>
               <div className="col-span-3">
                 <label
-                  htmlFor={"newTask"}
+                  htmlFor={"taskPriority"}
                   className="text-sm tracking-wide opacity-65 font-medium "
                 >
-                  Task Priroty
+                  Task Priority
                 </label>
-                <Select className="text-xs  placeholder:text-xs">
-                  <SelectTrigger className="text-xs placeholder:text-xs px-3 py-1 focus-visible:ring-0 border-accent">
+                <Select
+                  onValueChange={handlePriority}
+                  className="text-xs  placeholder:text-xs"
+                  value={priority}
+                >
+                  <SelectTrigger
+                    id="taskPriority"
+                    className="text-xs placeholder:text-xs px-3 py-1 focus-visible:ring-0 border-accent"
+                  >
                     <SelectValue placeholder="Priority" />
                   </SelectTrigger>
 
                   <SelectContent className="">
-                    {["High", "Medium", "Low"].map((items, itemIntex) => (
+                    {priorityOptions.map((items, itemIntex) => (
                       <SelectItem
                         className="hover:text-accent-foreground"
                         value={items}
@@ -101,20 +162,21 @@ const MakeTodos = ({ className }) => {
                     id="descriptionOfTasks"
                     name="taskDescription"
                     value={descriptionValue}
-                    onChange={(e) => setDescriptionValue(e.target.value)}
+                    onChange={handleTaskDescription}
                     className="text-sm placeholder:text-xs bg-transparent border-accent focus-visible:ring-0 "
                   />
                 </div>
-                <Button 
-                onClick={handleCreate}
-                variant="outline"
-                className="cursor-pointer"
+                <Button
+                  type="submit"
+                  variant="outline"
+                  className="cursor-pointer"
+                  disabled={isButtonDisabled}
                 >
                   Create Task
                 </Button>
               </div>
             </div>
-          </div>
+          </form>
         </CardContent>
       </Card>
     </div>

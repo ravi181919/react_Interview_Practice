@@ -22,11 +22,11 @@ export const todosSlice = createSlice({
        */
       state.todos.push({
         id: nanoid(),
-        ...action.payload,
         isCompleted: false,
         createdAt: new Date().toISOString(),
         duedate: action.payload.duedate || null, // Default due date to null if not provided
         priority: action.payload.priority ?? "medium", // Default priority to "medium" if not provided (high, medium, low)
+        ...action.payload,
       });
     },
     deleteTodo: (state, action) => {
