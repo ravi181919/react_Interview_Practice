@@ -16,7 +16,7 @@ const MainLayout = () => {
         </header>
 
         {/* Main */}
-        <main className="w-full min-h-[90vh] overflow-y-scroll relative dark:bg-black/8 bg-neutral-800 rounded-lg mt-1 p-">
+        <main className="w-full min-h-[90vh] overflow-y-scroll relative dark:bg-black/8 bg-neutral-800 rounded-lg mt-1 ">
           <Outlet />
         </main>
 

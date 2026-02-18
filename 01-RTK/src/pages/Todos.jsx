@@ -3,7 +3,7 @@ import React from 'react'
 
 const Todos = () => {
   return (
-    <div>
+    <div className='w-full lg:h-full h-[90vh] relative '>
       <AllTodos />
     </div>
   )

@@ -5,7 +5,7 @@ const Home = () => {
   console.log("hello");
   
   return (
-    <div className='flex items-center justify-center h-full'>
+    <div className='flex h-full w-full '>
       <AllTodos />
       {/* <h1 className='border px-4 py-1.5 rounded-md text-xs font-medium'>Home</h1> */}
     </div>

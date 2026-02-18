@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { addTodos } from "@/store/slices/todos/todosSlice";
 import { useDispatch } from "react-redux";
+import { IoIosClose } from "react-icons/io";
 
 const MakeTodos = ({ className }) => {
   const dispatch = useDispatch();
@@ -76,7 +77,7 @@ const MakeTodos = ({ className }) => {
         priority,
         title: inputValueOfTitle.trim(),
         description: descriptionValue.trim(),
-      })
+      }),
     );
 
     setInputValueOfTitle("");
@@ -85,13 +86,22 @@ const MakeTodos = ({ className }) => {
     toast.success("Task Created");
   };
   return (
-    <div className={`max-w-sm flex relative ${className}`}>
+    <div className={` max-w-full flex ${className}`}>
       <Card className="bg-accent-foreground w-full">
-        <CardHeader>
-          <CardTitle>Create Your Tasks or Projects</CardTitle>
-          <CardDescription className="text-xs">
-            form to create a your task or project
-          </CardDescription>
+        <CardHeader >
+          <div className="flex w-full items-center justify-between">
+          <div>
+            <CardTitle>Create Your Tasks or Projects</CardTitle>
+            <CardDescription className="text-xs">
+              form to create a your task or project
+            </CardDescription>
+          </div>
+          <span
+            className={`border border-accent rounded-full font-medium inline-flex h-7 w-7 justify-center items-center `}
+          >
+            <IoIosClose  />
+          </span>
+          </div>
         </CardHeader>
         <CardContent>
           <form
