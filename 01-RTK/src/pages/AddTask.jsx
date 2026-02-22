@@ -7,7 +7,7 @@ const AddTask = ({isMakeNewTodo, setIsMakeNewTodo}) => {
   const [priority, setPriority] = useState("");
 
   return (
-    <div className="w-full h-full relative">
+    <div className="w-full relative">
       <Activity mode={isMakeNewTodo ? "visible" : "hidden"}>
         <div className="w-full h-full flex absolute top-0  left-0 items-center z-10 rounded-lg backdrop-blur-md justify-center">
           <MakeTodos />
