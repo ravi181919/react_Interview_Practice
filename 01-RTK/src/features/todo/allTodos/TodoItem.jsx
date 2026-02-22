@@ -6,7 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ArrowUpDown, Ellipsis } from "lucide-react";
+import { ArrowUpDown, ArrowUp, Ellipsis, CircleCheckBig, Timer, Circle, CircleOff, Heart  } from "lucide-react";
 const TodoItem = () => {
   // priorityOptions: available choices; priority: currently selected
   const [sortOptions] = useState(["Asc", "Desc"]);
@@ -22,7 +22,7 @@ const TodoItem = () => {
   return (
     <div className="w-full border rounded-md h-full">
       {/* Header of itmes */}
-      <div className="grid grid-cols-12 gap-4 items-center w-full bg-accent-foreground/40 rounded-t-md px-2 py-2">
+      <div className="grid grid-cols-12 gap-4 items-center w-full bg-accent-foreground/40 rounded-t-md px-4 py-2">
         {/* Select All Box */}
         <div className="flex col-span-2 gap-2 items-center ">
           <input type="checkbox" className="h-2.5 w-2.5" />
@@ -115,13 +115,13 @@ const TodoItem = () => {
 
       {/* Task List */}
 
-      <div className="grid grid-cols-12 gap-4 items-center w-full px-2 py-3 border-b ">
+      <div className="grid grid-cols-12 gap-4 items-center w-full px-4 py-3 border-b ">
         <div className="flex col-span-2 gap-2 items-center">
           <input type="checkbox" className="h-2.5 w-2.5" />
           <h1 className="text-xs">Task-1819</h1>
         </div>
-        <div className="col-span-5 flex items-center gap-1 overflow-x-scroll">
-          <span className="rounded-full text-[0.6vw] bg-accent text-accent-foreground px-1.5 py-0.5 tracking-widest">
+        <div className="col-span-5 flex items-center gap-2 overflow-x-scroll">
+          <span className="rounded-full text-[0.6vw] bg-accent/65 text-accent-foreground px-1.5 py-0.5 tracking-widest">
             Document
           </span>
           <p className=" text-xs tracking-wide whitespace-nowrap">
@@ -131,19 +131,15 @@ const TodoItem = () => {
               : "This is first task to check this todo items"}
           </p>
         </div>
-        <div className="col-span-2 flex items-center w-fit gap-1">
-          <span className="rounded-full text-[0.6vw] bg-accent text-accent-foreground px-1 py-px font-medium tracking-widest">
-            D
-          </span>
+        <div className="col-span-2 flex items-center w-fit gap-2">
+         <Circle size={12} className={`opacity-65`}/>
           <p className=" text-xs tracking-wide">Completed</p>
         </div>
-        <div className="col-span-1 flex items-center w-fit gap-1">
-          <span className="rounded-full text-[0.6vw] bg-accent text-accent-foreground px-1 py-px font-medium tracking-widest">
-            D
-          </span>
+        <div className="col-span-1 flex items-center w-fit gap-2">
+            <ArrowUp size={12} className={`opacity-65`} />
           <p className=" text-xs tracking-wide">Highs</p>
         </div>
-        <div className="col-span-1 flex items-center justify-center  gap-1">
+        <div className="col-span-1 flex items-center justify-end">
           <Ellipsis className="xs" />
         </div>
       </div>
