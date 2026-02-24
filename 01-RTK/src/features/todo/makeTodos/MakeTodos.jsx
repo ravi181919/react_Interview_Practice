@@ -22,7 +22,7 @@ import { addTodos } from "@/store/slices/todos/todosSlice";
 import { useDispatch } from "react-redux";
 import { IoIosClose } from "react-icons/io";
 
-const MakeTodos = ({ className }) => {
+const MakeTodos = ({setIsMakeNewTodo, className }) => {
   const dispatch = useDispatch();
   const [inputValueOfTitle, setInputValueOfTitle] = useState("");
   const [descriptionValue, setDescriptionValue] = useState("");
@@ -86,7 +86,7 @@ const MakeTodos = ({ className }) => {
     toast.success("Task Created");
   };
   return (
-    <div className={` max-w-full flex ${className}`}>
+    <div className={`max-w-full flex ${className}`}>
       <Card className="bg-accent-foreground w-full">
         <CardHeader >
           <div className="flex w-full items-center justify-between">
@@ -96,11 +96,12 @@ const MakeTodos = ({ className }) => {
               form to create a your task or project
             </CardDescription>
           </div>
-          <span
-            className={`border border-accent rounded-full font-medium inline-flex h-7 w-7 justify-center items-center `}
+          <Button
+          onClick={() => setIsMakeNewTodo(false)}
+            className={`border border-accent rounded-full font-medium inline-flex h-7 w-6 justify-center items-center `}
           >
             <IoIosClose  />
-          </span>
+          </Button>
           </div>
         </CardHeader>
         <CardContent>

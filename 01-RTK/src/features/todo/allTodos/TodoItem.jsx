@@ -6,12 +6,30 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ArrowUpDown, ArrowUp, Ellipsis, CircleCheckBig, Timer, Circle, CircleOff, Heart  } from "lucide-react";
+import {
+  ArrowUpDown,
+  ArrowUp,
+  Ellipsis,
+  CircleCheckBig,
+  Timer,
+  Circle,
+  CircleOff,
+  Heart,
+} from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import useTodos from "@/store/slices/todos/useTodos";
+import EmptyData from "@/components/common/EmptyData";
+
 const TodoItem = () => {
+  const { todos } = useTodos();
+  const dispatch = useDispatch();
+  console.log(todos);
+
   // priorityOptions: available choices; priority: currently selected
   const [sortOptions] = useState(["Asc", "Desc"]);
   const [statusOptions] = useState(["Pending", "Completed", "Progress"]);
   const [priorityOptions] = useState(["High", "Medium", "Low"]);
+
   const [sort, setSort] = useState("");
   const [status, setStatus] = useState("");
   const [priority, setPriority] = useState("");
@@ -115,34 +133,51 @@ const TodoItem = () => {
 
       {/* Task List */}
 
-      <div className="grid grid-cols-12 gap-4 items-center w-full px-4 py-3 border-b ">
-        <div className="flex col-span-2 gap-2 items-center">
-          <input type="checkbox" className="h-2.5 w-2.5" />
-          <h1 className="text-xs">Task-1819</h1>
-        </div>
-        <div className="col-span-5 flex items-center gap-2 overflow-x-scroll">
-          <span className="rounded-full text-[0.6vw] bg-accent/65 text-accent-foreground px-1.5 py-0.5 tracking-widest">
-            Document
-          </span>
-          <p className=" text-xs tracking-wide whitespace-nowrap">
-            {"This is first task to check this todo items".length > 50
-              ? "This is first task to check this todo items".slice(0, 30) +
-                "..."
-              : "This is first task to check this todo items"}
-          </p>
-        </div>
-        <div className="col-span-2 flex items-center w-fit gap-2">
-         <Circle size={12} className={`opacity-65`}/>
-          <p className=" text-xs tracking-wide">Completed</p>
-        </div>
-        <div className="col-span-1 flex items-center w-fit gap-2">
-            <ArrowUp size={12} className={`opacity-65`} />
-          <p className=" text-xs tracking-wide">Highs</p>
-        </div>
-        <div className="col-span-1 flex items-center justify-end">
-          <Ellipsis className="xs" />
-        </div>
-      </div>
+      {todos.length > 0 ? (
+        todos.map((todosItems, todosIndex) => (
+          <div
+            key={todosItems.id || todosIndex}
+            className="grid grid-cols-12 gap-4 items-center w-full px-4 py-3 border-b "
+          >
+            <div className="flex col-span-2 gap-2 items-center">
+              <input type="checkbox" className="h-2.5 w-2.5" />
+              <h1 className="text-xs">{todosItems.title}</h1>
+            </div>
+            <div className="col-span-5 flex items-center gap-2 overflow-x-scroll">
+              <span className="rounded-full text-[0.6vw] bg-accent/65 text-accent-foreground px-1.5 py-0.5 tracking-widest">
+                Document
+              </span>
+              <p className=" text-xs tracking-wide whitespace-nowrap">
+                {todosItems.description.length > 50
+                  ? todosItems.description.slice(0, 30) + "..."
+                  : todosItems.description}
+              </p>
+            </div>
+            <div className="col-span-2 flex items-center w-fit gap-2">
+              {todosItems.isCompleted ? (
+                <Circle size={12} className={`opacity-65`} />
+              ) : (
+                <Timer size={12} className="opacity-65" />
+              )}
+              <p className=" text-xs tracking-wide">
+                {todosItems.isCompleted ? "Completed" : "Progress"}
+              </p>
+            </div>
+            <div className="col-span-1 flex items-center w-fit gap-2">
+              <ArrowUp
+                size={12}
+                className={`opacity-65 ${todosItems.priority === "High" ? "" : todosItems.priority === "Medium" ? "rotate-90" : "rotate-180"}`}
+              />
+              <p className=" text-xs tracking-wide">{todosItems.priority}</p>
+            </div>
+            <div className="col-span-1 flex items-center justify-end">
+              <Ellipsis className="xs" />
+            </div>
+          </div>
+        ))
+      ) : (
+        <EmptyData />
+      )}
     </div>
   );
 };

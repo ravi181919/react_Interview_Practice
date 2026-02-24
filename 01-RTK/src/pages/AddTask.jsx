@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import MakeTodos from "@/features/todo/makeTodos/MakeTodos";
 import React, { useState, Activity } from "react";
 import { useSelector } from "react-redux";
@@ -7,13 +8,13 @@ const AddTask = ({isMakeNewTodo, setIsMakeNewTodo}) => {
   const [priority, setPriority] = useState("");
 
   return (
-    <div className="w-full relative">
+    <div className="w-full relative py-2 md:py-0">
       <Activity mode={isMakeNewTodo ? "visible" : "hidden"}>
-        <div className="w-full h-full flex absolute top-0  left-0 items-center z-10 rounded-lg backdrop-blur-md justify-center">
-          <MakeTodos />
+        <div className="w-full h-[85vh] flex absolute top-0 left-0 items-center z-10 rounded-lg backdrop-blur-md justify-center">
+          <MakeTodos setIsMakeNewTodo={setIsMakeNewTodo}/>
         </div>
       </Activity>
-      <div className="w-full h-full relative">
+      <div className="w-full relative flex md:items-center md:flex-row flex-col gap-2.5">
         <div className="grid lg:grid-cols-6 grid-cols-1 lg:gap-0 gap-4 lg:place-content-between  w-full items-center relative">
           <div className="lg:col-span-2">
             <h1 className="text-xl font-medium leading-none">
@@ -24,7 +25,13 @@ const AddTask = ({isMakeNewTodo, setIsMakeNewTodo}) => {
             </p>
           </div>
         </div>
+
+        <Button onClick={() => setIsMakeNewTodo(true)} variant="outline" className="text-xs w-fit h-fit ">
+          Add Task
+        </Button>
       </div>
+
+
     </div>
   );
 };
