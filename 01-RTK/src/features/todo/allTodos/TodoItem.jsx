@@ -20,7 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useTodos from "@/store/slices/todos/useTodos";
 import EmptyData from "@/components/common/EmptyData";
 
-const TodoItem = () => {
+const TodoItem = ({ofTodosHeader = true}) => {
   const { todos } = useTodos();
   const dispatch = useDispatch();
   console.log(todos);
@@ -40,7 +40,7 @@ const TodoItem = () => {
   return (
     <div className="w-full border rounded-md h-full">
       {/* Header of itmes */}
-      <div className="grid grid-cols-12 gap-4 items-center w-full bg-accent-foreground/40 rounded-t-md px-4 py-2">
+      <div  className={`grid grid-cols-12 gap-4 items-center w-full bg-accent-foreground/40 rounded-t-md px-4 py-2 ${ofTodosHeader === false && "hidden"}`}>
         {/* Select All Box */}
         <div className="flex col-span-2 gap-2 items-center ">
           <input type="checkbox" className="h-2.5 w-2.5" />
