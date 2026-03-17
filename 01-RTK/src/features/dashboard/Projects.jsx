@@ -12,7 +12,7 @@ const Projects = ({ Card, CardHeader }) => {
         <h1 className="font-medium text-sm w-fit">Projects</h1>
 
         <CardContent className="w-full overflow-y-auto pb-0 max-h-24.5 flex-col lg:flex hidden">
-          <TodoItem ofTodosHeader={false} />
+          <TodoItem ofTodosHeader={false} isUseAsProps={true}/>
         </CardContent>
       </CardHeader>
     </Card>

@@ -20,7 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useTodos from "@/store/slices/todos/useTodos";
 import EmptyData from "@/components/common/EmptyData";
 
-const TodoItem = ({ofTodosHeader = true}) => {
+const TodoItem = ({ofTodosHeader = true, isUseAsProps = false}) => {
   const { todos } = useTodos();
   const dispatch = useDispatch();
   console.log(todos);
@@ -38,7 +38,7 @@ const TodoItem = ({ofTodosHeader = true}) => {
   const handleStatus = (value) => {};
   const handlePriority = (value) => {};
   return (
-    <div className="w-full border rounded-md h-full">
+    <div className={`w-full ${isUseAsProps ? "border-none" : "border"} rounded-md h-full`}>
       {/* Header of itmes */}
       <div  className={`grid grid-cols-12 gap-4 items-center w-full bg-accent-foreground/40 rounded-t-md px-4 py-2 ${ofTodosHeader === false && "hidden"}`}>
         {/* Select All Box */}
@@ -170,13 +170,13 @@ const TodoItem = ({ofTodosHeader = true}) => {
               />
               <p className=" text-xs tracking-wide">{todosItems.priority}</p>
             </div>
-            <div className="col-span-1 flex items-center justify-end">
+            <div className="col-span-2 flex items-center justify-center">
               <Ellipsis className="xs" />
             </div>
           </div>
         ))
       ) : (
-        <EmptyData />
+        isUseAsProps === false ? <EmptyData title="No Task Found" /> : <><h1 className="text-center py-5 opacity-65">! No Task Found !</h1></>
       )}
     </div>
   );
